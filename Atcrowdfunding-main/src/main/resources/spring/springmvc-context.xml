@@ -42,6 +42,7 @@
         <property name="exceptionMappings">  
             <props>
                 <prop key="java.lang.Exception">error/error</prop>
+                <prop key="com.tyy.atcrowdfunding.potal.exception.LoginFailException">login</prop>
             </props>  
         </property>  
     </bean>
