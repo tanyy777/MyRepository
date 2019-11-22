@@ -31,15 +31,15 @@
       	${exception.message}    
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户登录</h2>
 		  <div class="form-group has-success has-feedback">
-			<input type="text" name="loginacct" class="form-control" id="inputSuccess4" placeholder="请输入登录账号" autofocus>
+			<input type="text" name="loginacct" class="form-control" id="floginacct" placeholder="请输入登录账号" autofocus>
 			<span class="glyphicon glyphicon-user form-control-feedback"></span>
 		  </div>
 		  <div class="form-group has-success has-feedback">
-			<input type="password" name="userpswd" class="form-control" id="inputSuccess4" placeholder="请输入登录密码" style="margin-top:10px;">
+			<input type="password" name="userpswd" class="form-control" id="fpassword" placeholder="请输入登录密码" style="margin-top:10px;">
 			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		  </div>
 		  <div class="form-group has-success has-feedback">
-			<select class="form-control" name="type">
+			<select class="form-control" name="type" id="ftype">
                 <option value="member">会员</option>
                 <option value="user">管理</option>
             </select>
@@ -63,6 +63,28 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script>
     function dologin() {
+        var floginacct = $("#floginacct");
+        var fpassword = $("#fpassword");
+        var ftype = $("#ftype");
+        $.ajax({
+        	url:"${APP_PATH}/doLogin.do",
+        	data:{"loginacct":floginacct.val(),"userpswd":fpassword.val(),"type":ftype.val()},
+        	type:"POST",
+        	success:function(result){
+       			console.log(result);
+        		if(result.isSuccess){
+        			window.location.href="${APP_PATH}/domain.do"
+        		}else{
+        		
+        			alert("fail");
+        		}
+        	}
+        
+        });
+        
+        
+        
+        
         /**var type = $(":selected").val();
         if ( type == "user" ) {
             window.location.href = "main.html";
@@ -70,7 +92,7 @@
             window.location.href = "index.html";
         }
         */
-        $("#loginForm").submit();
+       // $("#loginForm").submit();
     }
     </script>
   </body>
